@@ -1,0 +1,47 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"      
+      xmlns:b="http://bootsfaces.net/ui">
+    <h:head>
+        <title>Project Name</title>
+        <meta name="author" content="The Author"></meta>
+        <h:outputStylesheet name="css/screen.css"/>
+    </h:head>
+    <!-- Add 50px padding top to the body for the navbar -->
+    <h:body style="padding-top: 50px; padding-bottom: 20px;">
+        <b:navBar brand="Showcase BootsFaces + PrimeFaces" inverse="true" fixed="top" brandHref="/wild/index-prime.jsf">
+            <b:navbarLinks>
+                <b:dropMenu value="About">
+                    <b:navLink value="About Showcase" outcome="about.jsf" iconAwesome="info"></b:navLink>
+                    <b:navLink value="BootsFaces" href="http://bootsfaces.net/" iconAwesome="external-link"></b:navLink>
+                    <b:navLink value="PrimeFaces" href="http://www.primefaces.org/" iconAwesome="external-link"></b:navLink>
+                    <b:navLink></b:navLink>
+                    <b:navLink header="Other useful components"></b:navLink>
+                    <b:navLink value="Project Lombok" href="https://projectlombok.org/" iconAwesome="external-link"></b:navLink>
+                    <b:navLink value="Arquillian" href="http://arquillian.org/" iconAwesome="external-link"></b:navLink>
+                </b:dropMenu>
+            </b:navbarLinks>
+        </b:navBar>
+         
+         
+
+		<div class="header-wildfly">
+		<h3>Showcase BootsFaces + PrimeFaces</h3>
+		</div>
+        <b:container>
+        <div id="content">
+            <ui:insert name="content">
+                    [Template content will be inserted here]
+        	 </ui:insert>
+		</div>
+            <footer>
+            <p>© Footer Your Company 2015</p>
+            </footer>
+        </b:container>
+
+    </h:body>
+</html>
