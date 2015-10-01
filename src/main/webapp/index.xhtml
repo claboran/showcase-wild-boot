@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="UTF-8"?>
 <!--
     JBoss, Home of Professional Open Source
     Copyright 2013, Red Hat, Inc. and/or its affiliates, and individual
@@ -19,79 +18,101 @@
     xmlns:ui="http://java.sun.com/jsf/facelets"
     xmlns:f="http://java.sun.com/jsf/core"
     xmlns:h="http://java.sun.com/jsf/html"
-    template="/WEB-INF/templates/default.xhtml">
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+    xmlns:b="http://bootsfaces.net/ui"
+    template="/WEB-INF/templates/default-prime.xhtml">
+                
     <ui:define name="content">
-        <h1>Welcome to WildFly!</h1>
+    <b:container>
+        <h1>Welcome to WildFly BootsFaces + PrimeFaces JEE7 Demo!</h1>
+    </b:container>
 
-        <div>
-            <p>You have successfully deployed a Java EE 7 Enterprise
-                Application.</p>
-            <h3>Your application can run on:</h3>
-            <img src="resources/gfx/wildfly_400x130.jpg" />
-        </div>
-
-        <h:form id="reg">
-            <h2>Member Registration</h2>
-            <p>Enforces annotation-based constraints defined on the
-                model class.</p>
-            <h:panelGrid columns="3" columnClasses="titleCell">
-                <h:outputLabel for="name" value="Name:" />
-                <h:inputText id="name" value="#{newMember.name}" />
-                <h:message for="name" errorClass="invalid" />
-
-                <h:outputLabel for="email" value="Email:" />
-                <h:inputText id="email" value="#{newMember.email}" />
-                <h:message for="email" errorClass="invalid" />
-
-                <h:outputLabel for="phoneNumber" value="Phone #:" />
-                <h:inputText id="phoneNumber"
-                    value="#{newMember.phoneNumber}" />
-                <h:message for="phoneNumber" errorClass="invalid" />
-            </h:panelGrid>
-
-            <p>
-                <h:panelGrid columns="2">
-                    <h:commandButton id="register"
-                        action="#{memberController.register}"
-                        value="Register" styleClass="register" />
-                    <h:messages styleClass="messages"
-                        errorClass="invalid" infoClass="valid"
-                        warnClass="warning" globalOnly="true" />
-                </h:panelGrid>
-            </p>
+        <h:form id="memberForm">
+        	<p:growl id="growl" showDetail="true" globalOnly="true" life="10000"/>
+        	<b:container>
+        		<b:row>
+        			<b:column col-md="8">
+		        		<b:panel title="Member Registration">	
+		        			<h:panelGroup styleClass="container">
+		        				<b:row>
+		        					<b:column col-md="2">
+				        				<h:outputText value="Name:" />
+		        					</b:column>
+		        					<b:column col-md="5">
+				        				<b:inputText id="nameInput" placeholder="Your name" value="#{newMember.name}"/>
+		        					</b:column>
+		        					<b:column col-md="3">
+				        			 	<h:message for="nameInput" errorClass="invalid" />	
+		        					</b:column>
+		        				</b:row>
+		        				<b:row>
+		        					<b:column col-md="2">
+				        				<h:outputText value="E-Mail:" />
+		        					</b:column>
+		        					<b:column col-md="5">
+				        				<b:inputText id="mailInput" placeholder="Your E-Mail" value="#{newMember.email}"/>
+		        					</b:column>
+		        					<b:column col-md="3">
+				        			 	<h:message for="mailInput" errorClass="invalid" />	
+		        					</b:column>
+		        				</b:row>
+		        				<b:row>
+		        					<b:column col-md="2">
+				        				<h:outputText value="Phone:" />
+		        					</b:column>
+		        					<b:column col-md="5">
+				        				<b:inputText id="phoneInput" placeholder="Your Phone" value="#{newMember.phoneNumber}"/>
+		        					</b:column>
+		        					<b:column col-md="3">
+				        			 	<h:message for="phoneInput" errorClass="invalid" />	
+		        					</b:column>		        					
+		        				</b:row>
+		        				<b:row>
+		        					<b:column col-md="2">
+		        						<b:commandButton value="Register" look="primary" size="md" action="#{memberController.register}" iconAwesome="save" update="growl" tooltip="Registers a user" tooltip-position="auto"/>
+		        					</b:column>
+		        				</b:row>
+		        			</h:panelGroup>
+		        			<hr />
+		        			<h3>Registered Members</h3>
+		        			<h:panelGroup id="table">
+		        				<p:dataTable var="member" value="#{members}" rendered="#{not empty members}">
+		        					<p:column headerText="Id">
+		        						<h:outputText value="#{member.id}" />
+		        					</p:column>
+		        					<p:column headerText="Name">
+		        						<h:outputText value="#{member.name}" />
+		        					</p:column>
+		        					<p:column headerText="E-Mail">
+		        						<h:outputText value="#{member.email}" />
+		        					</p:column>
+		        					<p:column headerText="Phone">
+		        						<h:outputText value="#{member.phoneNumber}" />
+		        					</p:column>
+		        				</p:dataTable>
+		        			</h:panelGroup>
+		        		</b:panel>
+        			</b:column>
+        			<b:column col-md="4">
+        				<b:well>
+        					<p>
+        						<i class="fa fa-info-circle fa-4x"></i>  The Showcase highlights some interesting new
+        						frameworks for JEE7 / JSF2.2 development
+        						<ul>
+	        						<li><a href="http://bootsfaces.net/index.jsf">BootsFaces</a></li>
+	        						<li><a href="http://bootsfaces.net/index.jsf">PrimeFaces</a></li>
+	        						<li><a href="http://wildfly.org/">WildFly JEE7</a></li>	
+        						</ul>
+        						BootsFaces is still under development but is an interesting path to good looking Web UI's 
+        					</p>
+        					<p>
+        						The rest interface is still available: <a href="http://localhost:8080/showcase-wild-boot/rest/members">http://localhost:8080/showcase-wild-boot/rest/members</a> 
+        					</p>
+        				</b:well>
+        			</b:column>
+        		</b:row>
+        	</b:container>
         </h:form>
-        <h2>Members</h2>
-        <h:panelGroup rendered="#{empty members}">
-            <em>No registered members.</em>
-        </h:panelGroup>
-        <h:dataTable var="_member" value="#{members}"
-            rendered="#{not empty members}"
-            styleClass="simpletablestyle">
-            <h:column>
-                <f:facet name="header">Id</f:facet>
-                #{_member.id}
-            </h:column>
-            <h:column>
-                <f:facet name="header">Name</f:facet>
-                #{_member.name}
-            </h:column>
-            <h:column>
-                <f:facet name="header">Email</f:facet>
-                #{_member.email}
-            </h:column>
-            <h:column>
-                <f:facet name="header">Phone #</f:facet>
-                #{_member.phoneNumber}
-            </h:column>
-            <h:column>
-                <f:facet name="header">REST URL</f:facet>
-                <a
-                    href="#{request.contextPath}/rest/members/#{_member.id}">/rest/members/#{_member.id}</a>
-            </h:column>
-            <f:facet name="footer">
-            REST URL for all members: <a
-                    href="#{request.contextPath}/rest/members">/rest/members</a>
-            </f:facet>
-        </h:dataTable>
     </ui:define>
 </ui:composition>
